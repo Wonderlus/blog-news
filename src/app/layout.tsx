@@ -1,4 +1,4 @@
-import NewsLayout from '@/components/NewsLayout'
+
 import './globals.scss'
 import { ReduxProvider } from '@/store/provider'
 

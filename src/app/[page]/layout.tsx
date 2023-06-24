@@ -7,21 +7,22 @@ import { setSourceState } from "@/store/source/sourceSlice"
 import { setViewState } from "@/store/view/viewSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/store/store";
+import { setSearchState } from "@/store/search/searchSlice";
 
 
 
 const BlogLayout = ({children}: {children: React.ReactNode}) => {
 
-    
-    const [search, setSearch] = useState("");
-    
+        
     const dispatch = useDispatch<AppDispatch>();
     const source = useAppSelector(state => state.sourceReducer);
     const view = useAppSelector(state => state.viewReducer);
+    const search = useAppSelector(state => state.searchReducer);
     
     function reset() {
         dispatch(setSourceState(""));
         dispatch(setViewState(true));
+        dispatch(setSearchState(""));
     }
 
     return ( 
@@ -36,7 +37,7 @@ const BlogLayout = ({children}: {children: React.ReactNode}) => {
                 <form>
                     <input onChange={(event) => {
                         event.preventDefault();
-                        setSearch(event.target.value);
+                        dispatch(setSearchState(event.target.value));
                     }} value={search}/>
                     <Image width={20} height={20} className={styles.image} src="/search.svg" alt="search icon"/>
                     
