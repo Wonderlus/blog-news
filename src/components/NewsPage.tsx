@@ -7,14 +7,6 @@ import { useAppSelector } from "@/store/store";
 import Image from "next/image"
 import Link from "next/link";
 
-interface IallNews {
-    title: string;
-    description: string;
-    link: string;
-    img: string;
-    date: string;
-    source: string | undefined;
-}
 
 const NewsPage = ({allNews} : {allNews: IallNews[]}) => {
         
@@ -54,7 +46,8 @@ const NewsPage = ({allNews} : {allNews: IallNews[]}) => {
         }
         
         if (search) {
-            sourceNews = sourceNews.filter(news => news.title.toLowerCase().includes(search.toLowerCase()) || news.description.toLowerCase().includes(search.toLowerCase()));
+            sourceNews = sourceNews.filter(news => news.title!.toLowerCase().includes(search.toLowerCase()) || news.description!.toLowerCase().includes(search.toLowerCase()));
+            
         }
 
         
@@ -88,7 +81,7 @@ const NewsPage = ({allNews} : {allNews: IallNews[]}) => {
                 <div className={styles.blogView}>
                     {outputNews?.map((news, index) => (
                         <div key={index * currentPage}>
-                            <Image width={200} height={100} src={news.img} alt={""} />
+                            <Image width={200} height={100} src={news.img!} alt={""} />
                             <div>
                             <a href={news.link} className={styles.title}>{news.title}</a>
                             <h5 className={styles.description}>{news.description}</h5>

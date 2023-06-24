@@ -3,6 +3,7 @@ import styles from "./NewsPage.module.scss"
 import { useEffect, useState } from "react";
 import NewsPage from "@/components/NewsPage";
 
+
 const links = ["https://www.mos.ru/rss", "https://lenta.ru/rss/news"];
 
 async function getData() {
@@ -14,34 +15,22 @@ async function getData() {
 }
 
 
-interface IRss {
-    items: {
-        title: string;
-        content?: string;
-        link: string;
-        enclosure?: {
-            url: string;
-        }
-        pubDate: string;
-    }[];
-    link?: string;
-    feedUrl?: string;
 
-}
+
 
 const BlogPage = async () => {
     
-    let rss: any = null;
+    let rss = null;
 
-
-        
     const data = await getData();
     
     
-    const allNews = [];
+    const allNews: IallNews[] = [];
+
     if (data) {
         rss = data;
     }
+
 
     if (rss) {
         for (let elem of rss) {
@@ -63,12 +52,14 @@ const BlogPage = async () => {
             }
         }
     }
+
     if (rss) {
 
         return ( 
            <NewsPage allNews={allNews}/>
             
          );
+
     } else {
         return (
             <div>

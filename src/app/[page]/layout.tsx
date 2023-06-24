@@ -37,8 +37,8 @@ const BlogLayout = ({children}: {children: React.ReactNode}) => {
                 <form>
                     <input onChange={(event) => {
                         event.preventDefault();
-                        dispatch(setSearchState(event.target.value));
-                    }} value={search}/>
+                        setTimeout(() => {dispatch(setSearchState(event.target.value))}, 1000);
+                    }}/>
                     <Image width={20} height={20} className={styles.image} src="/search.svg" alt="search icon"/>
                     
                 </form>
